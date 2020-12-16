@@ -12,16 +12,21 @@ import org.openapitools.client.models.StudentMinDto
 
 
 class MainActivity : AppCompatActivity() {
+    companion object {
+        const val basePath = "http://192.168.1.36:5000"
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         StrictMode.setThreadPolicy(StrictMode.ThreadPolicy.Builder().permitAll().build())
 
-        val apiInstance = StudentsApi("http://192.168.1.36:5000")
+        val apiInstance = StudentsApi(basePath)
 
         val result = apiInstance.studentsGet()
-        val intent = Intent(this, StudentActivity::class.java)
+        val intentStudent = Intent(this, StudentActivity::class.java)
+        val intentGrade = Intent(this, GradeActivity::class.java)
 
         val studentsTableLayout = findViewById<View>(R.id.myLayout) as TableLayout
         studentsTableLayout.addView(TableRow(this).also {
@@ -37,16 +42,16 @@ class MainActivity : AppCompatActivity() {
                     text = "успеваемость"
                     textSize = 11.0f
                     setOnClickListener {
-                        intent.putExtra("id", student.id)
-                        startActivity(intent)
+                        intentStudent.putExtra("id", student.id)
+                        startActivity(intentStudent)
                     }
                 })
                 it.addView(Button(this).apply {
                     text = "оценить"
                     textSize = 11.0f
                     setOnClickListener {
-                        intent.putExtra("id", student.id)
-                        startActivity(intent)
+                        intentGrade.putExtra("id", student.id)
+                        startActivity(intentGrade)
                     }
                 })
             })

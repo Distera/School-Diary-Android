@@ -21,12 +21,11 @@ class StudentActivity : AppCompatActivity() {
         setContentView(R.layout.activity_student)
 
         val arguments = intent.extras
-        val pach = "http://192.168.1.36:5000"
 
-        val apiInstanceGrades = GradesApi(pach)
-        val apiInstanceStudents = StudentsApi(pach)
-        val apiInstanceSubjects = SubjectsApi(pach)
-        val apiInstanceTeachers = TeachersApi(pach)
+        val apiInstanceGrades = GradesApi(MainActivity.basePath)
+        val apiInstanceStudents = StudentsApi(MainActivity.basePath)
+        val apiInstanceSubjects = SubjectsApi(MainActivity.basePath)
+        val apiInstanceTeachers = TeachersApi(MainActivity.basePath)
 
         val student : StudentDto = apiInstanceStudents.studentsIdGet(arguments!!["id"] as Int)
         val grades = student.gradesIds!!.map{
