@@ -37,10 +37,7 @@ class MainActivity : AppCompatActivity() {
 
         result.forEach { student ->
             studentsTableLayout.addView(TableRow(this).also {
-                it.addView(TextView(this).apply { text = "${student.middleName} ${student.firstName} ${student.lastName}"})
-                it.addView(Button(this).apply {
-                    text = "успеваемость"
-                    textSize = 11.0f
+                it.addView(TextView(this).apply { text = "${student.middleName} ${student.firstName} ${student.lastName}"
                     setOnClickListener {
                         intentStudent.putExtra("id", student.id)
                         startActivity(intentStudent)
@@ -48,6 +45,7 @@ class MainActivity : AppCompatActivity() {
                 })
                 it.addView(Button(this).apply {
                     text = "оценить"
+
                     textSize = 11.0f
                     setOnClickListener {
                         intentGrade.putExtra("id", student.id)
